@@ -1,0 +1,42 @@
+
+/*ヘッダー用CSS*/
+header{
+    background-color: black;
+}
+/*ヘッダー左側*/
+.header_content{
+    display:flex;
+    gap: 20px;
+}
+
+nav li{
+    display:flex;
+    margin-left:10px;
+}
+
+nav li a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.nav_address{
+    margin-left: 20px;
+}
+/*検索バー*/
+.header_search{
+    width: 40%;
+}
+.header_search form{
+    display:flex;
+}
+.header_search_field{
+    flex-grow: 1;
+}
+.search_btn{
+    border:none;
+    background-color: orange;
+}
+
+/*ヘッダー右側*/
+.nav_right{
+    display: flex;
+}

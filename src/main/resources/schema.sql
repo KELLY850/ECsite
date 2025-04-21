@@ -177,6 +177,8 @@ CREATE TABLE order_items(
 CREATE TABLE admin_users(
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
     role VARCHAR(20) DEFAULT 'USER',
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
