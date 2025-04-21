@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="users/common/linkrel ::style_link"></div>
+    <title>Title</title>
+</head>
+<body>
+<!--ヘッダー挿入-->
+  <div th:replace="users/common/header :: siteHeader"></div>
+
+<!--script挿入-->
+<div th:replace="users/common/script :: script_link"></div>
+</body>
+</html>

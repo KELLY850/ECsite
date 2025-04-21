@@ -1,0 +1,29 @@
+
+
+<header th:fragment="siteHeader">
+<!-- トップ共通リンク-->
+    <nav class="nav_left">
+        <li>
+            <a th:href="@{/}">お買い物.com</a>
+            <div class="nav_address">
+                <a th:href="@{/}"><span>お届け先　毛利さんここ共通のユーザーネームね。</span><p>ここは郵便番号</p></a>
+            </div>
+        </li>
+    </nav>
+<!--    共通検索バー-->
+    <div class="header_search">
+        <form method="post">
+            <!-- 左側カテゴリ選択       -->
+            <div class="header_search_left">
+
+            </div>
+            <!--   キーワード検索部分     -->
+            <div class="header_search_field">
+                <label for="header_search" style="display:none">お買い物.comを検索</label>
+                <input class="form-control" id="header_search" type="text" placeholder="お買い物.comを検索">
+            </div>
+            <!--   検索ボタン     -->
+
+        </form>
+    </div>
+</header>
