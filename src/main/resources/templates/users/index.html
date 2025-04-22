@@ -2,14 +2,23 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <div th:replace="users/common/linkrel ::style_link"></div>
+    <div th:replace="~{users/common/linkrel ::style_link}"></div>
     <title>Title</title>
 </head>
 <body>
 <!--ヘッダー挿入-->
-  <div th:replace="users/common/header :: siteHeader"></div>
+    <div th:replace="~{users/common/header :: siteHeader}"></div>
 
+<!--TOP画面本文-->
+    <div class="top_content">
+        <div class="top_image">
+            <img src="/images/top.jpeg" alt="TOP画像">
+        </div>
+    </div>
+
+<!--フッター挿入-->
+    <div th:replace="~{users/common/footer :: siteFooter}"></div>
 <!--script挿入-->
-<div th:replace="users/common/script :: script_link"></div>
+    <div th:replace="~{users/common/script :: script_link}"></div>
 </body>
 </html>

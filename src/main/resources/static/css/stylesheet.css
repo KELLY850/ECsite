@@ -1,0 +1,82 @@
+
+/*ヘッダー用CSS*/
+header{
+    background-color: #1b2268;
+}
+/*ヘッダー左側*/
+.header_content{
+    display:flex;
+    gap: 20px;
+}
+.site-name{
+ font-family: "Mochiy Pop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+nav li{
+    display:flex;
+    margin-left:10px;
+}
+
+nav li a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.nav_address{
+    margin-left: 20px;
+}
+/*検索バー*/
+.header_search{
+    width: 40%;
+}
+.header_search form{
+    display:flex;
+}
+.header_search_field{
+    flex-grow: 1;
+}
+.search_btn{
+    border-radius: 0 10px 10px 0;
+    border:none;
+    background-color: orange;
+}
+.form-control{
+    border-radius: 0;
+}
+.form-select {
+    border-radius: 10px 0 0 10px;
+}
+
+/*ヘッダー右側*/
+.nav_right{
+    display: flex;
+}
+
+.fa-cart-shopping{
+    color:orange;
+        font-size: 20px;
+}
+
+/*フッター用CSS*/
+
+.footer_content{
+    text-align: center;
+    background-color: #1b2268;
+    color: white;
+}
+.footer_top_return{
+    background-color:#46427d;
+}
+
+.footer_top_return a{
+     color:white;
+     text-decoration:none;
+}
+.footer_link li{
+    list-style: none;
+}
+
+.footer_link li a{
+    color:white;
+    text-decoration:none;
+}

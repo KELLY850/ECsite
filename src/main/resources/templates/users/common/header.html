@@ -1,29 +1,49 @@
 
 
 <header th:fragment="siteHeader">
-<!-- トップ共通リンク-->
-    <nav class="nav_left">
-        <li>
-            <a th:href="@{/}">お買い物.com</a>
-            <div class="nav_address">
-                <a th:href="@{/}"><span>お届け先　毛利さんここ共通のユーザーネームね。</span><p>ここは郵便番号</p></a>
-            </div>
-        </li>
-    </nav>
-<!--    共通検索バー-->
-    <div class="header_search">
-        <form method="post">
-            <!-- 左側カテゴリ選択       -->
-            <div class="header_search_left">
+<!-- トップ共通リンク-->　　
+    <div class="header_content">
+        <!--  ヘッダー左側  -->
+        <nav class="nav_left">
+            <li>
+                <div class="site-name">
+                 <a th:href="@{/}">お買い物.com</a>
+                </div>
+                <div class="nav_address">
+                    <a th:href="@{/}"><span>お届け先　毛利さんここ共通のユーザーネームね。</span><p>ここは郵便番号</p></a>
+                </div>
+            </li>
+        </nav>
+    <!--    共通検索バー　　真ん中-->
+        <div class="header_search">
+            <form method="post">
 
-            </div>
-            <!--   キーワード検索部分     -->
-            <div class="header_search_field">
-                <label for="header_search" style="display:none">お買い物.comを検索</label>
-                <input class="form-control" id="header_search" type="text" placeholder="お買い物.comを検索">
-            </div>
-            <!--   検索ボタン     -->
-
-        </form>
+                <!-- 左側カテゴリ選択       -->
+                <div class="header_search_category">
+                    <!--  一旦カテゴリーはテーブルから取得せず。-->
+                    <select class="form-select" aria-label="全て">
+                        <option selected>全て</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <!--   キーワード検索部分     -->
+                <div class="header_search_field">
+                    <label for="header_search" style="display:none;">お買い物.comを検索</label>
+                    <input class="form-control" id="header_search" type="text" placeholder="お買い物.comを検索">
+                </div>
+                <!--   検索ボタン     -->
+                <button type="submit" class="search_btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+    <!--    ヘッダー右側-->
+        <nav class="nav_right">
+            <li><a th:href="@{/}">マイページ</a></li>
+            <li><a th:href="@{/}">注文履歴</a></li>
+            <li><a th:href="@{/}"><i class="fa-solid fa-cart-shopping"></i>0(動的に)カート</a></li>
+        </nav>
     </div>
 </header>
