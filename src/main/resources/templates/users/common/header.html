@@ -6,7 +6,9 @@
         <!--  ヘッダー左側  -->
         <nav class="nav_left">
             <li>
-                <a th:href="@{/}">お買い物.com</a>
+                <div class="site-name">
+                 <a th:href="@{/}">お買い物.com</a>
+                </div>
                 <div class="nav_address">
                     <a th:href="@{/}"><span>お届け先　毛利さんここ共通のユーザーネームね。</span><p>ここは郵便番号</p></a>
                 </div>
@@ -41,7 +43,7 @@
         <nav class="nav_right">
             <li><a th:href="@{/}">マイページ</a></li>
             <li><a th:href="@{/}">注文履歴</a></li>
-            <li><a th:href="@{/}"><i class="fa-solid fa-cart-shopping"></i>カート</a></li>
+            <li><a th:href="@{/}"><i class="fa-solid fa-cart-shopping"></i>0(動的に)カート</a></li>
         </nav>
     </div>
 </header>
