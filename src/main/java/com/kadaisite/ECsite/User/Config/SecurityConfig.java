@@ -1,15 +1,23 @@
-package com.kadaisite.ECsite.Config.Auth;
+package com.kadaisite.ECsite.User.Config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 //springsecurityの設定を有効化・カスタマイズ設定する
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+
 //    セキュリティ設定
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
@@ -19,10 +27,13 @@ public class SecurityConfig {
                         .requestMatchers("/login","/").permitAll()//URLベースでの記載
                         .anyRequest().authenticated()//それ以外のページは認証必須
                 )
-//                .formLogin(form->form
-//                        .loginPage("/login") //ログイン用URLの指定
-//                        .defaultSuccessUrl("/")//ログイン成功時の遷移URL
-//                )
+                .formLogin(form->form
+                        .loginPage("/login") //ログイン用URLの指定
+                        .usernameParameter("email")//usernameの値を"email"から取得するよう設定する
+                        .passwordParameter("password")
+//                      ※　 usernameParameter(), passwordParameter()で指定する文字列は、htmlのname属性の名前と同名になる。
+                        .defaultSuccessUrl("/")//ログイン成功時の遷移URL
+                )
         ;
         return http.build();
     }
