@@ -26,7 +26,7 @@ public class LoginUserDetailsServiceImpl implements UserDetailsService {
         } else {
         // 対象データが存在しない
             throw new UsernameNotFoundException(
-                    email + " => 合致するアドレスは存在しません");
+                    email + " => 合致するアドレスが存在しません");
         }
     }
 

@@ -1,3 +1,5 @@
+
+/*TOP画面*/
 .top_image{
     width:100vw;
     height:auto;
@@ -5,4 +7,11 @@
 
 .top_image img{
     width:100%;
+}
+
+/*ログイン画面*/
+form{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
 }

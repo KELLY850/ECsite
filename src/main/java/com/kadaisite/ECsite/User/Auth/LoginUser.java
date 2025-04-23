@@ -14,4 +14,8 @@ public class LoginUser extends User {
 //        Userに下記を渡す。
         super(email,password,authorities);
     }
+    @Override//emailで受け取るためにusernameを返す。
+    public  String getUsername(){
+        return  super.getUsername();
+    }
 }

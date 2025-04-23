@@ -6,66 +6,55 @@
     <title>ログイン画面</title>
 </head>
 <body>
-<style>
-    .red{
-        color:red
-    }
-    .grenn{
-        color:green
-    }
-    .blue{
-        color:blue
-    }
-
-</style>
-<!--ヘッダー挿入-->
-<div th:replace="~{users/common/header :: siteHeader}"></div>
 
 <!--ログイン画面本文-->
 <div id="app">
-    {{number}}
-    <button v-on:click="countUp">カウントアップ</button>
-    <div v-text="number"></div>
-    <div v-if="number">条件次第で表示</div>
-    <ul>
-        <li v-for="item in items">{{item}}</li>
-    </ul>
-    <div v-bind:class="color">カラー</div>
-    <input type="text" v-model="color">
-    値と連動
-    {{custom_color}}
-    省略形
-    <div :class="color">カラー</div>
-    <button @click="countUp">カウントアップ</button>
+    <form method="post" th:action="@{/login}" @submit="checkLogin">
+        <div th:if="${param.error}" class="alert alert-danger">
+            ログインに失敗しました。
+        </div>
+        <div class="mb-3 row justify-content-center">
+            <label for="email" class="form-label">メール</label>
+            <input type="email" class="form-control" v-model="email" id="email" name="email" placeholder="name@example.com">
+        </div>
+        <div v-if="emailError" class="text-danger">{{emailError}}</div>
+        <div class="mb-3 row justify-content-center">
+            <label for="password" class="form-label">パスワード</label>
+            <input type="password" id="password" class="form-control" v-model="password" name="password" placeholder="パスワードを入力してください">
+        </div>
+        <div v-if="passwordError" class="text-danger">{{passwordError}}</div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">ログイン</button>
+        </div>
+    </form>
 </div>
 
 
-<!--フッター挿入-->
-<div th:replace="~{users/common/footer :: siteFooter}"></div>
+
+
 <!--script挿入-->
 <div th:replace="~{users/common/script :: script_link}"></div>
 <script>
-    new Vue({
-        el:"#app",
-        data: {
-            number:0,
-            items:[1,2,3],
-            color:'aaaaa',
-
-        },
-        methods:{
-            countUp:function(){
-<!--                alert('test')-->
-                this.number = this.number+1
+  new Vue({
+    el:"#app",
+    data:{
+        email:'',
+        password:'',
+        emailError:'',
+        passwordError:''
+    },
+    methods:{
+        checkLogin(e){
+            if(!this.email){
+                this.emailError="メールアドレスを入力してください。";
+                 e.preventDefault();
+            }else if(!this.password){
+                this.passwordError="パスワードを入力してください。";
+                e.preventDefault();
             }
-        },
-        computed:{
-             custom_color:function(){
-                return this.color.toUpperCase();
-             }
         }
-
-    })
+    }
+  });
 </script>
 </body>
 </html>
