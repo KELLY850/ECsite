@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="~{users/common/linkrel ::style_link}"></div>
+    <title>ログイン画面</title>
+</head>
+<body>
+<style>
+    .red{
+        color:red
+    }
+    .grenn{
+        color:green
+    }
+    .blue{
+        color:blue
+    }
+
+</style>
+<!--ヘッダー挿入-->
+<div th:replace="~{users/common/header :: siteHeader}"></div>
+
+<!--ログイン画面本文-->
+<div id="app">
+    {{number}}
+    <button v-on:click="countUp">カウントアップ</button>
+    <div v-text="number"></div>
+    <div v-if="number">条件次第で表示</div>
+    <ul>
+        <li v-for="item in items">{{item}}</li>
+    </ul>
+    <div v-bind:class="color">カラー</div>
+    <input type="text" v-model="color">
+    値と連動
+    {{custom_color}}
+    省略形
+    <div :class="color">カラー</div>
+    <button @click="countUp">カウントアップ</button>
+</div>
+
+
+<!--フッター挿入-->
+<div th:replace="~{users/common/footer :: siteFooter}"></div>
+<!--script挿入-->
+<div th:replace="~{users/common/script :: script_link}"></div>
+<script>
+    new Vue({
+        el:"#app",
+        data: {
+            number:0,
+            items:[1,2,3],
+            color:'aaaaa',
+
+        },
+        methods:{
+            countUp:function(){
+<!--                alert('test')-->
+                this.number = this.number+1
+            }
+        },
+        computed:{
+             custom_color:function(){
+                return this.color.toUpperCase();
+             }
+        }
+
+    })
+</script>
+</body>
+</html>
