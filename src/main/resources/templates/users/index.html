@@ -7,18 +7,88 @@
 </head>
 <body>
 <!--ヘッダー挿入-->
-    <div th:replace="~{users/common/header :: siteHeader}"></div>
-
-<!--TOP画面本文-->
-    <div class="top_content">
-        <div class="top_image">
-            <img src="/images/top.jpeg" alt="TOP画像">
-        </div>
+<div th:replace="~{users/common/header :: siteHeader}"></div>
+<!--カルーセル-->
+<div id="app">
+    <swiper :options="swiperOptions" ref="mySwiper" class="carousel">
+            <swiper-slide v-for="(img, index) in images" :key="index" class="swiper-slide">
+                <img :src="img" alt="" />
+            </swiper-slide>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </swiper>
+</div>
+<!--商品画像の並び-->
+<div class="product">
+    <div class="product_table">
+        <ul>
+            <li><img src="/images/top2.png"></li>
+            <li><img src="/images/top3.png"></li>
+        </ul>
+        <ul>
+            <li><img src="/images/top2.png"></li>
+            <li><img src="/images/top3.png"></li>
+        </ul>
     </div>
+    <div class="product_table">
+        <ul>
+            <li><img src="/images/top2.png"></li>
+            <li><img src="/images/top3.png"></li>
+        </ul>
+        <ul>
+            <li><img src="/images/top2.png"></li>
+            <li><img src="/images/top3.png"></li>
+        </ul>
+    </div>
+</div>
+<!--TOP画面本文-->
+<div class="top_content">
+    <div class="top_image">
+        <img src="/images/top.jpeg" alt="TOP画像">
+    </div>
+</div>
 
 <!--フッター挿入-->
-    <div th:replace="~{users/common/footer :: siteFooter}"></div>
+<div th:replace="~{users/common/footer :: siteFooter}"></div>
 <!--script挿入-->
-    <div th:replace="~{users/common/script :: script_link}"></div>
+<div th:replace="~{users/common/script :: script_link}"></div>
+<script>
+    Vue.use(VueAwesomeSwiper);
+  new Vue({
+    el: "#app",
+    data: {
+      images: [
+        "/images/top2.png",
+        "/images/top3.png",
+        "/images/top.jpeg"
+      ],
+      swiperOptions: {
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        autoplay: {
+          delay: 5000
+        },
+        speed: 500,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        if (this.$refs.mySwiper && this.$refs.mySwiper.swiper) {
+          this.$refs.mySwiper.swiper.update();
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>
