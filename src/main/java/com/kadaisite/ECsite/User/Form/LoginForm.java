@@ -16,7 +16,6 @@ import org.hibernate.validator.constraints.Range;
 @Data
 public class LoginForm {
     @NotBlank(message = "メールアドレスを入力してください")
-    @Size(min=1,max=100,message = "{min}〜{max}以内で入力してください。")
     @Email(message = "メールアドレスの形式が無効です。")
     private String email;
     @NotBlank(message = "パスワードを入力してください。")
