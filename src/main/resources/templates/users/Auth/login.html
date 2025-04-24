@@ -9,20 +9,22 @@
 
 <!--ログイン画面本文-->
 <div id="app">
-    <form method="post" th:action="@{/login}" @submit="checkLogin">
+    <form method="post" th:action="@{/login}" @submit="checkLogin" th:object="${loginForm}">
         <div th:if="${param.error}" class="alert alert-danger">
             ログインに失敗しました。
         </div>
         <div class="mb-3 row justify-content-center">
             <label for="email" class="form-label">メール</label>
-            <input type="email" class="form-control" v-model="email" id="email" name="email" placeholder="name@example.com">
+            <input type="email" class="form-control" v-model="email" id="email" placeholder="name@example.com" th:field="*{email}">
         </div>
         <div v-if="emailError" class="text-danger">{{emailError}}</div>
+<!--        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>-->
         <div class="mb-3 row justify-content-center">
             <label for="password" class="form-label">パスワード</label>
-            <input type="password" id="password" class="form-control" v-model="password" name="password" placeholder="パスワードを入力してください">
+            <input type="password" id="password" class="form-control" v-model="password" placeholder="パスワードを入力してください" th:field="*{password}">
         </div>
         <div v-if="passwordError" class="text-danger">{{passwordError}}</div>
+<!--        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>-->
         <div class="col-auto">
             <button type="submit" class="btn btn-primary">ログイン</button>
         </div>

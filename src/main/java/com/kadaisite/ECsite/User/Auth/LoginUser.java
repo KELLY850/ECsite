@@ -1,21 +1,49 @@
 package com.kadaisite.ECsite.User.Auth;
 
+
+import com.kadaisite.ECsite.User.Entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class LoginUser extends User {
-    public LoginUser(
-            String email,//メールアドレスに変更
-            String password,
-            //下記は権限
-            Collection<? extends GrantedAuthority>authorities){
-//        Userに下記を渡す。
-        super(email,password,authorities);
+@Data
+@AllArgsConstructor
+public class LoginUser implements UserDetails {
+    private final User user;
+    private final Collection<? extends GrantedAuthority>authorities;
+    @Override
+    public String getUsername(){
+        return user.getEmail();
     }
-    @Override//emailで受け取るためにusernameを返す。
-    public  String getUsername(){
-        return  super.getUsername();
+    @Override
+    public String getPassword(){
+        return user.getPassword();
     }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    public Long getId(){
+        return user.getId();
+    }
+//    細かに分けていたけど、ここでいっぺんにUserエンティティのデータを返す。
+    public User getUser(){
+        return user;
+    }
+
 }

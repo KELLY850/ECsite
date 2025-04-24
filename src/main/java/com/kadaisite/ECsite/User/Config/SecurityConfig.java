@@ -18,21 +18,24 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
-//    セキュリティ設定
+    //    セキュリティ設定
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth->auth//下記順番を間違えたら見えなくなるので注意。
-                        .requestMatchers("/css/**","/images/**").permitAll()//静的リソースの表示許可
-                        .requestMatchers("/login","/").permitAll()//URLベースでの記載
+                .authorizeHttpRequests(auth -> auth//下記順番を間違えたら見えなくなるので注意。
+                        .requestMatchers("/css/**", "/images/**").permitAll()//静的リソースの表示許可
+                        .requestMatchers("/login", "/").permitAll()//URLベースでの記載
                         .anyRequest().authenticated()//それ以外のページは認証必須
                 )
-                .formLogin(form->form
-                        .loginPage("/login") //ログイン用URLの指定
-                        .usernameParameter("email")//usernameの値を"email"から取得するよう設定する
-                        .passwordParameter("password")
+                .formLogin(form -> form
+                                .loginPage("/login") //ログイン用URLの指定
+                                .loginProcessingUrl("/login") // POST処理も同じに
+                                .failureUrl("/login?error")
+                                .usernameParameter("email")//usernameの値を"email"から取得するよう設定する
+                                .passwordParameter("password")
 //                      ※　 usernameParameter(), passwordParameter()で指定する文字列は、htmlのname属性の名前と同名になる。
-                        .defaultSuccessUrl("/")//ログイン成功時の遷移URL
+                                .defaultSuccessUrl("/")//ログイン成功時の遷移URL
+                                .permitAll()
                 )
         ;
         return http.build();

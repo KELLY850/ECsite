@@ -1,6 +1,6 @@
 
 
-<header th:fragment="siteHeader">
+<header xmlns:th="http://www.thymeleaf.org" th:fragment="siteHeader" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!-- トップ共通リンク-->　　
     <div class="header_content">
         <!--  ヘッダー左側  -->
@@ -9,8 +9,9 @@
                 <div class="site-name">
                  <a th:href="@{/}">お買い物.com</a>
                 </div>
-                <div class="nav_address">
-                    <a th:href="@{/}"><span>お届け先　毛利さんここ共通のユーザーネームね。</span><p>ここは郵便番号</p></a>
+                <div class="nav_address" sec:authorize="isAuthenticated()">
+                    <a th:href="@{/}">お届け先<span th:text="${username}"></span></a>
+                    <p>郵便番号</p>
                 </div>
             </li>
         </nav>
@@ -41,8 +42,8 @@
         </div>
     <!--    ヘッダー右側-->
         <nav class="nav_right">
-            <li><a th:href="@{/}">マイページ</a></li>
-            <li><a th:href="@{/}">注文履歴</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/}">マイページ</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/}">注文履歴</a></li>
             <li><a th:href="@{/}"><i class="fa-solid fa-cart-shopping"></i>0(動的に)カート</a></li>
         </nav>
     </div>
