@@ -37,6 +37,7 @@ p{
 .header_search form{
     display:flex;
     width:auto;
+    margin-bottom: 25px;
 }
 .header_search_field{
     flex-grow: 1;
