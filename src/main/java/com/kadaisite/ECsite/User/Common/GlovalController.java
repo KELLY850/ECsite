@@ -1,4 +1,4 @@
-package com.kadaisite.ECsite.User.Controller.Common;
+package com.kadaisite.ECsite.User.Common;
 
 import com.kadaisite.ECsite.User.Auth.LoginUser;
 import com.kadaisite.ECsite.User.Entity.User;

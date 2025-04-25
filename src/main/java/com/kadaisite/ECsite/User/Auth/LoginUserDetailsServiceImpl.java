@@ -13,6 +13,7 @@ import java.util.Collections;
 @Service
 @AllArgsConstructor
 public class LoginUserDetailsServiceImpl implements UserDetailsService {
+//    ユーザーマッパーで検索したデータを取得する為に記述。
     private  final UserMapper userMapper;
     @Override//下記emailで検索するように引数email
     public UserDetails loadUserByUsername(String email)throws UsernameNotFoundException {

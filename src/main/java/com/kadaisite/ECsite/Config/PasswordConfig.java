@@ -1,4 +1,4 @@
-package com.kadaisite.ECsite.User.Config;
+package com.kadaisite.ECsite.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

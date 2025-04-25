@@ -36,8 +36,7 @@ public class SecurityConfig {
 //                      ※　 usernameParameter(), passwordParameter()で指定する文字列は、htmlのname属性の名前と同名になる。
                                 .defaultSuccessUrl("/")//ログイン成功時の遷移URL
                                 .permitAll()
-                )
-        ;
+                );
         return http.build();
     }
 
