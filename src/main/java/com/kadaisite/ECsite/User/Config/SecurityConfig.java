@@ -19,7 +19,7 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
 
     //    セキュリティ設定
-    @Bean
+    @Bean(name = "SecurityConfig")
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth//下記順番を間違えたら見えなくなるので注意。

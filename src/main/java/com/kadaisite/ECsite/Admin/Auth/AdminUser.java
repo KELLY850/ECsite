@@ -13,10 +13,12 @@ import java.util.Collection;
 public class AdminUser implements UserDetails {
 //エンティティと結びつける為に、記述。
     private final Admin_users adminUsers;
+//    権限
     private final Collection<? extends GrantedAuthority> authorities;
 
     @Override
     public String getUsername(){
+//        ここでDBのメールアドレスを取得。
         return adminUsers.getEmail();
     }
 
