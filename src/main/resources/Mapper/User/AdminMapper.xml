@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kadaisite.ECsite.Admin.Repository.AdminMapper">
+    <!-- 全ユーザー取得   -->
+    <select id="getAllUsers" resultType="com.kadaisite.ECsite.Admin.Entity.Admin_users">
+        SELECT * FROM admin_users WHERE delete_flg = 0 ORDER BY id
+    </select>
+    <!-- メールでユーザ検索-->
+    <select id="selectByUserEmail" resultType="com.kadaisite.ECsite.Admin.Entity.Admin_users">
+        SELECT * FROM admin_users WHERE email = #{email}
+    </select>
+    <!--    管理者ユーザーの新規登録-->
+    <insert id="insertUser" parameterType="com.kadaisite.ECsite.Admin.Entity.Admin_users">
+        INSERT INTO admin_users (name,email,password,created_at) VALUES (#{name},#{email},#{password},#{createdAt})
+    </insert>
+</mapper>
+
