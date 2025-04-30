@@ -11,8 +11,8 @@ VALUES
 --admin_usersに一旦ダミーデータ
 INSERT INTO admin_users(name,email,password,created_at,role)
 VALUES
-('admin','test@gmail.com','$2a$10$BDGzUbL.eSwgdh6QNVr6mOZDUIvB3kqOpVcn3JA2vFn.kMlS8HU0m',CURRENT_TIMESTAMP,"ADMIN");
+('admin','test@gmail.com','$2a$10$BDGzUbL.eSwgdh6QNVr6mOZDUIvB3kqOpVcn3JA2vFn.kMlS8HU0m',CURRENT_TIMESTAMP,'ADMIN');
 
 INSERT INTO admin_users(name,email,password,created_at,role)
 VALUES
-('user','test2@gmail.com','$2a$10$BDGzUbL.eSwgdh6QNVr6mOZDUIvB3kqOpVcn3JA2vFn.kMlS8HU0m',CURRENT_TIMESTAMP,"USER");
+('user','test2@gmail.com','$2a$10$BDGzUbL.eSwgdh6QNVr6mOZDUIvB3kqOpVcn3JA2vFn.kMlS8HU0m',CURRENT_TIMESTAMP,'USER');
