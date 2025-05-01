@@ -12,8 +12,8 @@
         SELECT * FROM admin_users WHERE email = #{email}
     </select>
     <!--    管理者ユーザーの新規登録-->
-    <insert id="insertUser" parameterType="com.kadaisite.ECsite.Admin.Entity.Admin_users">
-        INSERT INTO admin_users (name,email,password,created_at) VALUES (#{name},#{email},#{password},#{createdAt})
+    <insert id="insertUser" parameterType="com.kadaisite.ECsite.Admin.Entity.Admin_users" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO admin_users (name,email,password,created_at) VALUES (#{name},#{email},#{password},CURRENT_TIMESTAMP)
     </insert>
 </mapper>
 

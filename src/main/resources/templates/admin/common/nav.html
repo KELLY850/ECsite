@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+
+<header xmlns:th="http://www.thymeleaf.org" th:fragment="adminHeader" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+        <!-- トップ共通リンク-->　　
+    <nav class="nav_right">
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/admin}">管理画面</a></li>
+        <li><a th:href="@{/admin}">管理者マイページ</a></li>
+        <li><a th:href="@{/admin/create}">ユーザー新規追加</a></li>
+        <li><a th:href="@{/admin}">商品新規追加</a></li>
+        <li><a th:href="@{/admin}">商品リスト</a></li>
+    </nav>
+
+</header>
