@@ -1,14 +1,20 @@
 package com.kadaisite.ECsite.Admin.Controller;
 
 import com.kadaisite.ECsite.Admin.Entity.Admin_users;
+import com.kadaisite.ECsite.Admin.Form.NewUserForm;
 import com.kadaisite.ECsite.Admin.Repository.AdminMapper;
+import com.kadaisite.ECsite.Admin.Service.InsertUser;
 import com.kadaisite.ECsite.User.Form.LoginForm;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +28,9 @@ import java.util.List;
 
 //管理者用URL
 /*
-*
+*管理画面TOP
+* ログイン画面
+* 新規ユーザー追加
 *
 * */
 @RequiredArgsConstructor
@@ -31,6 +39,8 @@ public class AdminController {
 //    DI化した認証情報をここで使えるように呼び出し。
     private final AuthenticationManager authenticationManager;
     private final AdminMapper adminMapper;
+    private final PasswordEncoder passwordEncoder;
+    private final InsertUser insertUser;
 
 //    ログイン後の管理画面
     @GetMapping("/admin")
@@ -50,6 +60,7 @@ public class AdminController {
     @PostMapping("/admin/login")
     public String AdminEntry(@Validated @ModelAttribute LoginForm loginForm,
                              BindingResult result,
+                             HttpServletRequest request,
                              Model model){
         if(result.hasErrors()) {//未入力などバリデーションエラーがあれば返す。
             return "/admin/Auth/login";
@@ -61,7 +72,11 @@ public class AdminController {
                             loginForm.getPassword()
                     )
             );
-            SecurityContextHolder.getContext().setAuthentication(authentication);//ログイン認証に成功したユーザーのセッション情報を保持。
+            System.out.println("authentication:"+authentication);
+            SecurityContext context = SecurityContextHolder.getContext();
+            context.setAuthentication(authentication);
+            request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);//ログイン認証に成功したユーザーのセッション情報を保持。
+
         }catch(AuthenticationException e){
             model.addAttribute("error","ログインに失敗しました。再度、メールとパスワードを確認の上、入力してください。");
             return "/admin/Auth/login";
@@ -69,4 +84,28 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+//  ユーザーの新規登録画面
+    @GetMapping("/admin/create")
+    public String create(@ModelAttribute NewUserForm newUserForm){
+        return "admin/AdminUser/createUser";
+    }
+    //    ユーザーの新規追加
+    @PostMapping("/admin/create")
+        public String createUser(
+                @Validated @ModelAttribute NewUserForm newUserForm,
+                BindingResult result,
+                Model model){
+        if (result.hasErrors()) {
+            return "admin/AdminUser/createUser"; // バリデーションエラー時は元の画面に戻す
+        }
+        try {
+//            責任分離の書き方をしてみました。insertUserサービスの中で登録処理実装。
+           insertUser.register(newUserForm);
+        } catch (Exception e) {
+            model.addAttribute("error","登録に失敗しました。メールアドレスがすでに登録されている可能性があります。");
+            return "admin/AdminUser/createUser";
+        }
+//        TOP画面に返す。
+        return "redirect:/admin";
+    }
 }

@@ -4,6 +4,7 @@ import com.kadaisite.ECsite.Admin.Auth.AdminUserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -45,7 +46,7 @@ public class AdminSecurityConfig {
                 .securityMatcher("/admin/**")//管理画面はadmin以降のリンクで
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers("/css/**", "/images/**").permitAll()
-                        .requestMatchers("/admin/login").permitAll()
+                        .requestMatchers( "/admin/login").permitAll()
                         .anyRequest().authenticated()
                 )
 //        やっぱり自分でログインフォームのバリデーションつけたかったので下記コメントアウト

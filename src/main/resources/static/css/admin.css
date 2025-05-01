@@ -1,0 +1,54 @@
+/*グローバルメニュー*/
+nav{
+    display: flex;
+    justify-content: flex-end;
+}
+li{
+     list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #696fe0;
+    margin: 0 10px;
+}
+/*ログイン画面*/
+.contain{
+    width:50%;
+    margin-top:50px;
+}
+form{
+    padding: 20px;
+    border: solid 1px #274e7a5e;
+}
+.justify-content-center{
+ margin-bottom:10px;
+}
+label{
+    text-align: left;
+    font-weight: bold;
+    margin: 10px;
+}
+.btn_log{
+    text-align: left;
+    margin-top: 20px;
+}
+
+/*TOP画面*/
+
+.table-secondary {
+    --bs-table-color: #4a66e8;
+    --bs-table-bg: #d0d6ff66;
+    --bs-table-border-color: #0055ff;
+    --bs-table-striped-bg: #9dbdff;
+    --bs-table-striped-color: #20369c;
+    --bs-table-active-bg: #647fb6;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #c4c4c4;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    margin-top: 50px;
+}
+/*全体*/
+body{
+    background-color: #3c94ff30;
+}
