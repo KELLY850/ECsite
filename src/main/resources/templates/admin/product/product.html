@@ -30,7 +30,7 @@
           <td th:text="${product.name}"></td>
           <td th:text="${product.price}"></td>
           <td th:text="${product.stock}"></td>
-          <td th:text="${product.createdAt}"></td>
+          <td th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
           <!--                <td ><a th:href="@{'/users/userDetail/'+${test.id}}">詳細</a></td>-->
         </tr>
         </tbody>

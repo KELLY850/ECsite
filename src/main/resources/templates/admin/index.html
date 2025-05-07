@@ -27,7 +27,7 @@
                 <td th:text="${admin.name}"></td>
                 <td th:text="${admin.email}"></td>
                 <td th:text="${admin.role}"></td>
-                <td th:text="${admin.createdAt}"></td>
+                <td th:text="${#temporals.format(admin.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
                 <td th:text="${admin.deleteFlg}"></td>
 <!--                <td ><a th:href="@{'/users/userDetail/'+${test.id}}">詳細</a></td>-->
             </tr>
