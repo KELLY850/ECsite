@@ -3,6 +3,9 @@ package com.kadaisite.ECsite.Admin.Form;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 * 商品登録用フォーム（バリデーション込み）
 * */
@@ -18,4 +21,6 @@ public class ProductForm {
   private Integer stock;
   @Size(max = 1000,message = "{max}を超えての入力はできません")
   private String description;
+//  登録用カテゴリー
+  private List<Long> categoryIds =new ArrayList<>();
 }

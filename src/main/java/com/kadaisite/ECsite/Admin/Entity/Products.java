@@ -1,6 +1,10 @@
 package com.kadaisite.ECsite.Admin.Entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 //商品テーブル用エンティティ
 /*
@@ -19,9 +23,13 @@ public class Products {
     private  Integer price;
     private  Integer stock;
     private String description;
-    private java.sql.Timestamp createdAt;
-    private java.sql.Timestamp updatedAt;
-    private java.sql.Timestamp deletedAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updatedAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime deletedAt;
     private Integer deleteFlg;
-
+//    1対多用に下記作成。商品に複数のカテゴリを付与できる。
+    private List<Categories> categoriesList;
 }

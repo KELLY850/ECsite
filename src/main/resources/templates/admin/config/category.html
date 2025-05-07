@@ -26,7 +26,7 @@
     </form>
 </div>
 <div th:unless="${categories.size() > 0}">
-    <p>カテゴリーが登録されていません。</p>
+    <p style="text-align: center;">カテゴリーが登録されていません。</p>
 </div>
 <div class="container text-center" th:if="${categories.size() > 0}">
     <table class="table table-striped table-secondary">
@@ -42,7 +42,8 @@
         <tr th:each="category : ${categories}">
             <td th:text="${category.id}"></td>
             <td th:text="${category.name}"></td>
-            <td th:text="${category.createdAt}"></td>
+            <!--  ここで登録日を希望の表示方々に変換          -->
+            <td th:text="${#temporals.format(category.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
             <!--                <td ><a th:href="@{'/users/userDetail/'+${test.id}}">詳細</a></td>-->
         </tr>
         </tbody>
