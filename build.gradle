@@ -40,6 +40,9 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 //	バリデーション追加
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+//	mapstruct試してみたいので挑戦追加！！
+	implementation 'org.mapstruct:mapstruct:1.6.3'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 }
 
 tasks.named('test') {

@@ -3,7 +3,7 @@ package com.kadaisite.ECsite.Admin.Controller;
 import com.kadaisite.ECsite.Admin.Entity.Admin_users;
 import com.kadaisite.ECsite.Admin.Form.NewUserForm;
 import com.kadaisite.ECsite.Admin.Repository.AdminMapper;
-import com.kadaisite.ECsite.Admin.Service.InsertUser;
+import com.kadaisite.ECsite.Admin.Service.UserService;
 import com.kadaisite.ECsite.User.Form.LoginForm;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,8 @@ public class AdminController {
     private final AuthenticationManager authenticationManager;
     private final AdminMapper adminMapper;
     private final PasswordEncoder passwordEncoder;
-    private final InsertUser insertUser;
+    private final UserService insertUser;
+
 
 //    ログイン後の管理画面
     @GetMapping("/admin")
@@ -108,4 +109,10 @@ public class AdminController {
 //        TOP画面に返す。
         return "redirect:/admin";
     }
+//設定画面
+    @GetMapping("/admin/config")
+    public String Config(){
+        return "admin/config/config";
+    }
+
 }
