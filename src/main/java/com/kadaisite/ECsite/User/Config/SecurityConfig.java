@@ -36,7 +36,7 @@ public class SecurityConfig {
                                 .usernameParameter("email")//usernameの値を"email"から取得するよう設定する
                                 .passwordParameter("password")
 //                      ※　 usernameParameter(), passwordParameter()で指定する文字列は、htmlのname属性の名前と同名になる。
-                                .defaultSuccessUrl("/")//ログイン成功時の遷移URL
+                                .defaultSuccessUrl("/", true)//ログイン成功時の遷移URL
                                 .permitAll()
                 );
         return http.build();

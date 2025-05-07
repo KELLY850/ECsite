@@ -4,10 +4,9 @@
         <!-- トップ共通リンク-->　　
     <nav class="nav_right">
         <li sec:authorize="isAuthenticated()"><a th:href="@{/admin}">管理画面</a></li>
-        <li><a th:href="@{/admin}">管理者マイページ</a></li>
-        <li><a th:href="@{/admin/create}">ユーザー新規追加</a></li>
-        <li><a th:href="@{/admin}">商品新規追加</a></li>
-        <li><a th:href="@{/admin}">商品リスト</a></li>
+        <li><a th:href="@{/admin/product/create}">商品新規追加</a></li>
+        <li><a th:href="@{/admin/product}">商品リスト</a></li>
+        <li><a th:href="@{/admin/config}">設定</a></li>
     </nav>
 
 </header>
