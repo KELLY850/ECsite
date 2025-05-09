@@ -12,7 +12,7 @@
     <div class="main_text">
         <p>商品の登録には必要項目を入力してください</p>
     </div>
-    <form method="post" th:action="@{/admin/product/create}" th:object="${productForm}">
+    <form method="post" th:action="@{/admin/product/create}" th:object="${productForm}" enctype="multipart/form-data">
         <div th:if="${error}" class="alert alert-danger" th:text="${error}">
         </div>
         <div class="row justify-content-center">
@@ -38,6 +38,10 @@
         <div class="form-check form-check-inline" th:each="category:${categoryList}">
             <input class="form-check-input" type="checkbox" th:value="${category.id}" th:id="${'cate'+category.id}" name="categoryIds">
             <label class="form-check-label" th:for="${'cate'+category.id}" th:text="${category.name}"></label>
+        </div>
+        <div class="input-group mb-3">
+            <label class="form-label" for="inputGroupFile02">画像</label>
+            <input type="file"multiple class="form-control" id="inputGroupFile02" name="images" style="width:100%;">
         </div>
         <div class="col-auto btn_log">
             <button type="submit" class="btn btn-primary">登録</button>

@@ -30,6 +30,8 @@ public class Products {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime deletedAt;
     private Integer deleteFlg;
-//    1対多用に下記作成。商品に複数のカテゴリを付与できる。
+//    1対多用に下記作成。中間テーブルのJOIN結果をを格納するために必要。
     private List<Categories> categoriesList;
+//    1対多用に下記作成。商品画像
+    private List<Product_images> images;
 }

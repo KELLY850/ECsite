@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kadaisite.ECsite.Admin.Repository.ProductImageMapper">
+
+    <insert id="insertImages" parameterType="com.kadaisite.ECsite.Admin.Entity.Product_images" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product_images(product_id,image_url,created_at) VALUES(#{productId},#{imageUrl},CURRENT_TIMESTAMP)
+    </insert>
+</mapper>
