@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class Product_images {
+    private Long id;
     private Long productId;
     private String imageUrl;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

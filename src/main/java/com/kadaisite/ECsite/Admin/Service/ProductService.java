@@ -6,9 +6,11 @@ import com.kadaisite.ECsite.Admin.Repository.ProductCategoryMapper;
 import com.kadaisite.ECsite.Admin.Repository.ProductImageMapper;
 import com.kadaisite.ECsite.Admin.Repository.ProductsMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -29,6 +31,8 @@ public class ProductService {
     * categoryIds　商品に紐づいたカテゴリーのID List型
     * images　商品に紐づいた商品画像の有無　List型
     * */
+    @Value("${upload.image.path}")
+    private String uploadDir;
     public void save(Products products, List<Long>categoryIds, List<MultipartFile> images){
         int product = productsMapper.insertProduct(products);
         System.out.println("登録結果：" + product);
@@ -51,10 +55,17 @@ public class ProductService {
                 try{
 //                    ランダムなIDを取得してそれを文字列に変えて、元画像の名前をつける。
                     String imageName = UUID.randomUUID().toString()+"_"+image.getOriginalFilename();
-//                   登録するためのディレクトリルート・登録画像名を設置。
-                    Path url = Paths.get("main/resources/static/images",imageName);
+//                   登録するためのディレクトリルートを設置、そしてそのルートを新たに作成。自分のシステムから絶対パス。
+                    Path url = Paths.get(System.getProperty("user.dir"), uploadDir);
+//                    Path url = Paths.get("uploads/images");
+                    if(Files.notExists(url)){
+                        Files.createDirectories(url);
+                    }
+
+//                    上記作成したルートで画像を保存。
+                    Path savePath = url.resolve(imageName);
 //                  画像としてパスに登録（画像生成）
-                    image.transferTo(url.toFile());
+                    image.transferTo(savePath.toFile());
                     Product_images productImages = new Product_images();
                     productImages.setProductId(productId);
                     productImages.setImageUrl("/images/"+imageName);
