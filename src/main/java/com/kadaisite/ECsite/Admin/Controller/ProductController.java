@@ -14,7 +14,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,9 +39,15 @@ public class ProductController {
         model.addAttribute("productForm", new ProductForm()); // フォームを初期化して渡す
         return "/admin/product/productCreate";
     }
+    /*
+    * 入力フォームからの商品登録
+    * productForm　商品登録フォーム
+    * images 登録された商品画像
+    * */
     @PostMapping("/admin/product/create")
     public String create(@Validated @ModelAttribute ProductForm productForm,
-//                         @RequestParam(value = "categoryIds",required = false) List<Long> categoryIds,
+//                         @RequestParam(value = "categoryIds",required = false) List<Long> categoryIds,結局、Paramで使用せず下記で調整。
+                         @RequestParam("images") List<MultipartFile> images,
                          BindingResult result,
                          Model model){
         // フォームデータの中身を確認
@@ -48,15 +57,19 @@ public class ProductController {
         }
         //        入力フォームで選択したカテゴリを取得
         List<Long> categoryIds = productForm.getCategoryIds();
-//        if(categoryIds == null){
+//        if(categoryIds == null){　Paramで取得していたらここ記述してNULLパターンを登録、空の配列。
 //            categoryIds=new ArrayList<>();
 //        }
+        //        もしも画像が空なら空の配列を新たに作成。
+        if(images.isEmpty()){
+            images = new ArrayList<>();
+        }
         try{
             //商品エンティティの型に合わせて、商品の受け取りフォームをエンティティに結びつける。
             Products products = productFormMapper.toEntity(productForm);
             System.out.println("登録対象のエンティティ：" + products);
             //サービス層を呼び出して、登録処理にもっていく。
-            productService.save(products,categoryIds);
+            productService.save(products,categoryIds,images);
 
         } catch (Exception e) {
 //            e.printStackTrace();
@@ -65,6 +78,10 @@ public class ProductController {
         }
         return "redirect:/admin/product";
     }
+    /*
+    * 商品一覧
+    * Products　商品エンティティ
+    * */
     @GetMapping("/admin/product")
     public String product(Model model){
        List<Products> products = productService.productList();

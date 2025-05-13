@@ -23,6 +23,7 @@ public class CategoryController {
     //カテゴリー登録画面
     @GetMapping("/admin/config/createCategory")
     public String CreateCategory(Model model){
+//        登録されているカテゴリを取得。
         List<Categories> categories = categoryService.CategoriesList();
         if(categories == null){
             model.addAttribute("error","カテゴリーの登録はまだありません");

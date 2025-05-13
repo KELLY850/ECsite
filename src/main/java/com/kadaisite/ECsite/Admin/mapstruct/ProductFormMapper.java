@@ -18,6 +18,7 @@ public interface ProductFormMapper {
     @Mapping(target = "deletedAt", ignore = true)
     @Mapping(target = "deleteFlg", ignore = true)
     @Mapping(target = "categoriesList",ignore = true)
+    @Mapping(target = "images",ignore = true)
 //    入力フォームとエンティティを合致させる。
     Products toEntity(ProductForm form);
 }

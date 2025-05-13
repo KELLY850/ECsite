@@ -1,7 +1,11 @@
 package com.kadaisite.ECsite.Admin.Form;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,4 +27,6 @@ public class ProductForm {
   private String description;
 //  登録用カテゴリー
   private List<Long> categoryIds =new ArrayList<>();
+//  画像登録用複数
+  private List<MultipartFile> images;
 }

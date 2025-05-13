@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class PageMapping {
+public class PageMappingController {
 //    TOP画面
     @GetMapping("/")
     public  String top(){

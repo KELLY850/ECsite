@@ -21,8 +21,7 @@ public class LoginUserDetailsServiceImpl implements UserDetailsService {
         User user = userMapper.selectByUserEmail(email);
         if (user != null ) {
         // 対象データが存在した場合、UserDetailsの実装クラスを返す
-            return new LoginUser(user,
-                    Collections.emptyList());//今回はユーザーに権限がないので空を返す。
+            return new LoginUser(user, Collections.emptyList());//今回はユーザーに権限がないので空を返す。
         } else {
         // 対象データが存在しない
             throw new UsernameNotFoundException(
