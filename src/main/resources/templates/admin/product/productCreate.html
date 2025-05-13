@@ -39,9 +39,10 @@
             <input class="form-check-input" type="checkbox" th:value="${category.id}" th:id="${'cate'+category.id}" name="categoryIds">
             <label class="form-check-label" th:for="${'cate'+category.id}" th:text="${category.name}"></label>
         </div>
+<!--        複数画像選択できるようにするにはJavaScriptで制御するので、そちらの実装はまたあとで。-->
         <div class="input-group mb-3">
             <label class="form-label" for="inputGroupFile02">画像</label>
-            <input type="file"multiple class="form-control" id="inputGroupFile02" name="images" style="width:100%;">
+            <input type="file" multiple class="form-control" id="inputGroupFile02" name="images">
         </div>
         <div class="col-auto btn_log">
             <button type="submit" class="btn btn-primary">登録</button>
