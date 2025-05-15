@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <div th:replace="~{admin/common/link ::link}"></div>
+  <title>管理者ログアウト確認画面</title>
+</head>
+<body>
+
+<!--ログアウト確認画面本文-->
+<div class="container text-center contain">
+  <div class="main_text">
+    <p>ログアウトを希望される場合は、下記をクリックしてください</p>
+  </div>
+  <form method="post" th:action="@{/admin/exit}">
+    <div th:if="${error}" class="alert alert-danger">
+      <div th:text="${error}"></div>
+      <div>
+        ログアウトに失敗した為、再度時間をおいて試してください。
+      </div>
+    </div>
+    <div class="col-auto btn_log">
+      <button type="submit" class="btn btn-primary">ログアウト</button>
+    </div>
+  </form>
+</div>
+
+
+
+<!--script挿入-->
+<div th:replace="~{admin/common/script :: script}"></div>
+</body>
+</html>

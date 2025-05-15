@@ -8,49 +8,72 @@
 <body>
 <div th:replace="~{admin/common/nav ::adminHeader}"></div>
 <!--新商品追加画面本文-->
-<div class="container text-center contain">
-    <div class="main_text">
-        <p>商品の登録には必要項目を入力してください</p>
+<div id="app">
+    <div class="container text-center contain">
+        <div class="main_text">
+            <p>商品の登録には必要項目を入力してください</p>
+        </div>
+        <form method="post" th:action="@{/admin/product/create}" th:object="${productForm}" enctype="multipart/form-data">
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}">
+            </div>
+            <div class="row justify-content-center">
+                <label for="name" class="form-label">商品名</label>
+                <input type="text" class="form-control" id="name" placeholder="商品名を入力してください" th:field="*{name}">
+            </div>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></div>
+            <div class="row justify-content-center">
+                <label for="price" class="form-label">料金</label>
+                <input type="number" class="form-control" id="price" placeholder="半角数字で入力してください" th:field="*{price}">円
+            </div>
+            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="alert alert-danger"></div>
+            <div class="row justify-content-center">
+                <label for="stock" class="form-label">在庫</label>
+                <input type="number" id="stock" class="form-control" placeholder="在庫数を入力してください" th:field="*{stock}">個
+            </div>
+            <div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="alert alert-danger"></div>
+            <div class="row justify-content-center">
+                <label for="description" class="form-label">商品説明</label>
+                <input type="text" id="description" class="form-control" placeholder="商品の説明を入力してください" th:field="*{description}">
+            </div>
+            <label class="form-label">カテゴリー</label><br>
+            <div class="form-check form-check-inline" th:each="category:${categoryList}">
+                <input class="form-check-input" type="checkbox" th:value="${category.id}" th:id="${'cate'+category.id}" name="categoryIds">
+                <label class="form-check-label" th:for="${'cate'+category.id}" th:text="${category.name}"></label>
+            </div>
+    <!--        複数画像選択できるようにするにはJavaScriptで制御するので、そちらの実装はまたあとで。-->
+            <div class="input-group mb-3" id="fileInputs">
+                <label class="form-label" for="inputGroupFile02">画像</label>
+                <input type="file" class="form-control" id="inputGroupFile02" name="images" multiple="multiple" onchange="displayFileNames()">
+            </div>
+            <div id="fileNameList"></div>
+            <div class="col-auto btn_log">
+                <button type="submit" class="btn btn-primary">登録</button>
+            </div>
+        </form>
     </div>
-    <form method="post" th:action="@{/admin/product/create}" th:object="${productForm}" enctype="multipart/form-data">
-        <div th:if="${error}" class="alert alert-danger" th:text="${error}">
-        </div>
-        <div class="row justify-content-center">
-            <label for="name" class="form-label">商品名</label>
-            <input type="text" class="form-control" id="name" placeholder="商品名を入力してください" th:field="*{name}">
-        </div>
-        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></div>
-        <div class="row justify-content-center">
-            <label for="price" class="form-label">料金</label>
-            <input type="number" class="form-control" id="price" placeholder="半角数字で入力してください" th:field="*{price}">円
-        </div>
-        <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="alert alert-danger"></div>
-        <div class="row justify-content-center">
-            <label for="stock" class="form-label">在庫</label>
-            <input type="number" id="stock" class="form-control" placeholder="在庫数を入力してください" th:field="*{stock}">個
-        </div>
-        <div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="alert alert-danger"></div>
-        <div class="row justify-content-center">
-            <label for="description" class="form-label">商品説明</label>
-            <input type="text" id="description" class="form-control" placeholder="商品の説明を入力してください" th:field="*{description}">
-        </div>
-        <label class="form-label">カテゴリー</label><br>
-        <div class="form-check form-check-inline" th:each="category:${categoryList}">
-            <input class="form-check-input" type="checkbox" th:value="${category.id}" th:id="${'cate'+category.id}" name="categoryIds">
-            <label class="form-check-label" th:for="${'cate'+category.id}" th:text="${category.name}"></label>
-        </div>
-<!--        複数画像選択できるようにするにはJavaScriptで制御するので、そちらの実装はまたあとで。-->
-        <div class="input-group mb-3">
-            <label class="form-label" for="inputGroupFile02">画像</label>
-            <input type="file" multiple class="form-control" id="inputGroupFile02" name="images">
-        </div>
-        <div class="col-auto btn_log">
-            <button type="submit" class="btn btn-primary">登録</button>
-        </div>
-    </form>
 </div>
 
-
 <div th:replace="~{admin/common/script ::script}"></div>
+<script>
+    function displayFileNames() {
+        const input = document.getElementById("inputGroupFile02");
+        const fileList = document.getElementById("fileNameList");
+        fileList.innerHTML = "";
+
+        const files = input.files;
+        if (files.length === 0) {
+            fileList.innerText = "選択されたファイルはありません";
+        } else {
+            const ul = document.createElement("ul");
+            for (let i = 0; i < files.length; i++) {
+                const li = document.createElement("li");
+                li.innerText = files[i].name;
+                ul.appendChild(li);
+            }
+            fileList.appendChild(ul);
+        }
+    }
+</script>
+
 </body>
 </html>

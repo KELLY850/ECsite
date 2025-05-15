@@ -4,12 +4,14 @@ import com.kadaisite.ECsite.User.Auth.LoginUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 //springsecurityの設定を有効化・カスタマイズ設定する
+@Order(2)
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -22,7 +24,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/**")//通常のECサイトページは先リンクで対応
                 .authorizeHttpRequests(auth -> auth//下記順番を間違えたら見えなくなるので注意。
                         .requestMatchers("/css/**", "/images/**").permitAll()//静的リソースの表示許可
                         .requestMatchers("/login", "/").permitAll()//URLベースでの記載

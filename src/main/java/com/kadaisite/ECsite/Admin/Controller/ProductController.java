@@ -50,11 +50,6 @@ public class ProductController {
                          @RequestParam("images") List<MultipartFile> images,
                          BindingResult result,
                          Model model){
-        // フォームデータの中身を確認
-        System.out.println("Product Form: " + productForm);
-        if (result.hasErrors()){
-            return "/admin/product/productCreate";
-        }
         //        入力フォームで選択したカテゴリを取得
         List<Long> categoryIds = productForm.getCategoryIds();
 //        if(categoryIds == null){　Paramで取得していたらここ記述してNULLパターンを登録、空の配列。

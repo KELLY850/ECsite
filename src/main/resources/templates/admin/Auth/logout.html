@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <div th:replace="~{admin/common/link ::link}"></div>
+  <title>管理者ログアウト画面</title>
+</head>
+<body>
+
+<!--ログアウト画面本文-->
+<div class="container text-center contain">
+  <div class="main_text">
+        <p>ログアウトしました。</p><br>
+        <p>再度、ログインしたい場合には、下記リンクから行ってください。</p><br>
+        <a th:href="@{/admin/login}">ログインを行う</a>
+  </div>
+</div>
+
+
+
+<!--script挿入-->
+<div th:replace="~{admin/common/script :: script}"></div>
+</body>
+</html>
