@@ -4,7 +4,7 @@ import com.kadaisite.ECsite.Admin.Auth.AdminUserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,10 +12,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 /*
 * 管理者用ログイン認証設定
 * */
+@Order(1)
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
@@ -49,6 +51,9 @@ public class AdminSecurityConfig {
                         .requestMatchers( "/admin/login").permitAll()
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/admin/login"))
+                )
 //        やっぱり自分でログインフォームのバリデーションつけたかったので下記コメントアウト
 //                .formLogin(form->form
 //                        .loginPage("/admin/login")
@@ -58,6 +63,11 @@ public class AdminSecurityConfig {
 //                        .passwordParameter("password")
 //                        .defaultSuccessUrl("/admin")
 //                        .permitAll()
+                .logout((logout)->logout
+//                        .logoutUrl("/admin/exit")
+                        .logoutSuccessUrl("/admin/logout")
+                        .permitAll()
+                )
                 ;
         return http.build();
     }
