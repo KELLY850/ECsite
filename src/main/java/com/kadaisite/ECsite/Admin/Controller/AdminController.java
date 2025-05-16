@@ -3,7 +3,7 @@ package com.kadaisite.ECsite.Admin.Controller;
 import com.kadaisite.ECsite.Admin.Entity.Admin_users;
 import com.kadaisite.ECsite.Admin.Form.NewUserForm;
 import com.kadaisite.ECsite.Admin.Repository.AdminMapper;
-import com.kadaisite.ECsite.Admin.Service.UserService;
+import com.kadaisite.ECsite.Admin.Service.ECsiteUserService;
 import com.kadaisite.ECsite.User.Form.LoginForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -43,7 +43,7 @@ public class AdminController {
     private final AuthenticationManager authenticationManager;
     private final AdminMapper adminMapper;
     private final PasswordEncoder passwordEncoder;
-    private final UserService insertUser;
+    private final ECsiteUserService insertUser;
 
 
 //    ログイン後の管理画面

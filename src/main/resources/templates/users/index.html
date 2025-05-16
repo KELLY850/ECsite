@@ -9,9 +9,7 @@
 <!--ヘッダー挿入-->
 <div th:replace="~{users/common/header :: siteHeader}"></div>
 <!--カルーセル-->
-<div th:if="${param.logout}" class="alert alert-success aller" role="alert">
-    ログアウトしました。
-</div>
+<div th:if="${message}" class="alert alert-success frash" th:text="${message}"></div>
 <div id="app">
 
     <swiper :options="swiperOptions" ref="mySwiper" class="carousel">

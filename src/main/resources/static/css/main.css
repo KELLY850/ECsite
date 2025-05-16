@@ -125,3 +125,11 @@ form{
         width: 100%;
         display: block;
 }
+/*新規登録*/
+.text-entry-dev{
+    color: #000;
+}
+.frash{
+    text-align:center;
+    margin:0;
+}

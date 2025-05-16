@@ -7,5 +7,7 @@
     <select id="selectByUserEmail" resultType="com.kadaisite.ECsite.User.Entity.User">
         SELECT * FROM users WHERE email = #{email}
     </select>
-
+    <insert id="insertUser" parameterType="com.kadaisite.ECsite.User.Entity.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users(name,email,tel,password,created_at) VALUES(#{name},#{email},#{tel},#{password},CURRENT_TIMESTAMP)
+    </insert>
 </mapper>
