@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
 //    ユーザーのemailで検索
     User selectByUserEmail(String email);
+//    新規登録
+    int insertUser(User user);
 }

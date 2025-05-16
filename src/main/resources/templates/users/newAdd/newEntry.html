@@ -8,34 +8,37 @@
 <body>
 
 <!--新規作成画面本文-->
-<form method="post" th:action="@{/newEntry}" th:object="${newEntryForm}" class="login_form">
-  <div th:if="${param.error}" class="alert alert-danger">
-    登録に失敗しました。
+<div class="login-overlay">
+  <div class="text-entry">
+    <p class="text-entry-dev">新規登録をされる方は、下記必須項目を入力してください。</p>
   </div>
-  <div class="mb-3 row justify-content-center">
-    <label for="name" class="form-label">名前</label>
-    <input type="text" class="form-control" id="name" placeholder="山田　太郎" th:field="*{name}">
-  </div>
-  <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-   <div class="mb-3 row justify-content-center">
-    <label for="email" class="form-label">メール</label>
-    <input type="email" class="form-control" id="email" placeholder="name@example.com" th:field="*{email}">
-  </div>
-  <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-  <div class="mb-3 row justify-content-center">
-    <label for="tel" class="form-label">TEL</label>
-    <input type="tel" class="form-control" id="tel" placeholder="09011111111" th:field="*{tel}">
-  </div>
-  <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></div>
-  <div class="mb-3 row justify-content-center">
-    <label for="password" class="form-label">パスワード</label>
-    <input type="password" id="password" class="form-control" placeholder="パスワードを入力してください" th:field="*{password}">
-  </div>
-  <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-primary">ログイン</button>
-  </div>
-</form>
+  <form method="post" th:action="@{/newEntry}" th:object="${newAddForm}" class="login_form">
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <div class="mb-3 row justify-content-center">
+      <label for="name" class="form-label">名前</label>
+      <input type="text" class="form-control" id="name" placeholder="山田　太郎" th:field="*{name}">
+    </div>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"class="alert alert-danger"></div>
+     <div class="mb-3 row justify-content-center">
+      <label for="email" class="form-label">メール</label>
+      <input type="email" class="form-control" id="email" placeholder="name@example.com" th:field="*{email}">
+    </div>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></div>
+    <div class="mb-3 row justify-content-center">
+      <label for="tel" class="form-label">TEL</label>
+      <input type="tel" class="form-control" id="tel" placeholder="携帯か固定電話：例09011111111" th:field="*{tel}">
+    </div>
+    <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" class="alert alert-danger"></div>
+    <div class="mb-3 row justify-content-center">
+      <label for="password" class="form-label">パスワード</label>
+      <input type="password" id="password" class="form-control" placeholder="パスワードを入力してください" th:field="*{password}">
+    </div>
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">登録</button>
+    </div>
+  </form>
+</div>
 
 <div th:replace="~{users/common/script :: script_link}"></div>
 </body>

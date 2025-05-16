@@ -26,7 +26,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth//下記順番を間違えたら見えなくなるので注意。
                         .requestMatchers("/css/**", "/images/**").permitAll()//静的リソースの表示許可
-                        .requestMatchers("/login", "/").permitAll()//URLベースでの記載
+                        .requestMatchers("/login", "/","/newEntry").permitAll()//URLベースでの記載
                         .anyRequest().authenticated()//それ以外のページは認証必須
                 )
                 .formLogin(form -> form
