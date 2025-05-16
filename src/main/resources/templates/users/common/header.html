@@ -44,7 +44,9 @@
         <nav class="nav_right">
             <li sec:authorize="isAuthenticated()"><a th:href="@{/}">マイページ</a></li>
             <li sec:authorize="isAuthenticated()"><a th:href="@{/}">注文履歴</a></li>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/login}">ログイン</a></li>
             <li><a th:href="@{/}"><i class="fa-solid fa-cart-shopping"></i>0(動的に)カート</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">ログアウト</a></li>
         </nav>
     </div>
 </header>

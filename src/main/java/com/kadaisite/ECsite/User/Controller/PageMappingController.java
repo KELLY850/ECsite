@@ -8,12 +8,16 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PageMappingController {
 //    TOP画面
     @GetMapping("/")
-    public  String top(){
+    public  String top(@RequestParam(value = "logout",required = false)String logout,Model model){
+        if(logout != null){
+            model.addAttribute("message","ログアウトに成功しました");
+        }
         return  "/users/index";
     }
 
@@ -29,6 +33,10 @@ public class PageMappingController {
             return "/users/Auth/login";
         }
         return "redirect:/";
+    }
+    @GetMapping("/logout")
+    public String logout(){
+        return "/users/Auth/logout";
     }
 
 }
