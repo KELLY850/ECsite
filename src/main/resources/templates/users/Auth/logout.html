@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <div th:replace="~{users/common/linkrel ::style_link}"></div>
+    <title>ログアウト画面</title>
+</head>
+<body>
+<!--ヘッダー挿入-->
+<div th:replace="~{users/common/header :: siteHeader}"></div>
+<!--ログアウト画面本文-->
+<div class="container-fluid text-center contain-logout">
+    <div class="logOutImg">
+        <img th:src="@{/images/shopImage.jpg}" alt="桜の画像">
+        <img th:src="@{/images/shoppingStartImg.jpg}" alt="桜の画像">
+    </div>
+    <div class="logout-overlay">
+        <div class="text-logout">
+            <p class="text-logout">ログアウトを希望される場合は、下記をクリックしてください</p>
+        </div>
+        <form method="post" th:action="@{/logout}">
+            <div class="col-auto logout_bottom">
+                <button type="submit" class="btn btn-primary" id="botton">ログアウト</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--フッター挿入-->
+<div th:replace="~{users/common/footer :: siteFooter}"></div>
+<div th:replace="~{users/common/script :: script_link}"></div>
+</body>
+</html>
