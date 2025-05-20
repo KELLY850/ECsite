@@ -13,6 +13,9 @@
 </div>
 <div th:if="${products.size() > 0}">
     <div class="container text-center">
+      <div>
+        <h1>商品一覧</h1>
+      </div>
       <table class="table table-striped table-secondary">
         <thead>
         <tr>
@@ -31,7 +34,7 @@
           <td th:text="${product.price}"></td>
           <td th:text="${product.stock}"></td>
           <td th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
-          <!--                <td ><a th:href="@{'/users/userDetail/'+${test.id}}">詳細</a></td>-->
+<!--          <td ><a th:href="@{'/users/userDetail/'+${test.id}}">詳細</a></td>-->
         </tr>
         </tbody>
       </table>

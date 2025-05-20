@@ -43,7 +43,10 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                                 .logoutSuccessUrl("/?logout")
                                 .permitAll()
-                        );
+                        )
+                .userDetailsService(userDetailsService);//Spring Security に「ユーザー情報をどこからどうやって取得するか」を教える設定
+        ;
+
         return http.build();
     }
 

@@ -3,7 +3,8 @@
 <header xmlns:th="http://www.thymeleaf.org" th:fragment="adminHeader" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <!-- トップ共通リンク-->　　
     <nav class="nav_right">
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/admin}">管理画面</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/admin}">管理者一覧</a></li>
+        <li><a th:href="@{/admin/usersList}">お客様一覧</a></li>
         <li><a th:href="@{/admin/product/create}">商品新規追加</a></li>
         <li><a th:href="@{/admin/product}">商品リスト</a></li>
         <li><a th:href="@{/admin/config}">設定</a></li>
