@@ -3,6 +3,8 @@ package com.kadaisite.ECsite.Admin.Service;
 import com.kadaisite.ECsite.Admin.Entity.Admin_users;
 import com.kadaisite.ECsite.Admin.Form.NewUserForm;
 import com.kadaisite.ECsite.Admin.Repository.AdminMapper;
+import com.kadaisite.ECsite.Admin.Repository.AdminUsersMapper;
+import com.kadaisite.ECsite.User.Entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class ECsiteUserService {
     private final PasswordEncoder passwordEncoder;
     private final AdminMapper adminMapper;
+    private final AdminUsersMapper adminUsersMapper;
 
     public void register(NewUserForm newUserForm){
         //            新規登録するエンティティのインスタンス作成
@@ -27,6 +30,39 @@ public class ECsiteUserService {
             throw new RuntimeException("ユーザー登録に失敗しました");
         }
 //            System.out.println(admin.getId());IDの連番取得OK
+    }
+
+//    ユーザー情報の取得
+    public User selectId(Long id){
+        User user = adminUsersMapper.selectById(id);
+        if (user == null){
+            throw new RuntimeException("ユーザー情報の取得に失敗しました");
+        }
+        return user;
+    }
+
+//    ユーザー情報の更新
+    public int updatedUser(User user){
+        boolean result=false;
+        User oldUser =adminUsersMapper.selectById(user.getId());
+//        入力値が以前と違ったらtrueを返す。
+        if(!oldUser.getName().equals(user.getName())){
+            oldUser.setName(user.getName());
+            result= true;
+        }
+        if (!oldUser.getEmail().equals(user.getEmail())){
+            oldUser.setEmail(user.getEmail());
+            result=true;
+        }
+        if (!oldUser.getTel().equals(user.getTel())){
+            oldUser.setTel(user.getTel());
+            result=true;
+        }
+        if(result){
+           return adminUsersMapper.updateUser(oldUser);
+        }
+        return 0;
+
     }
 
 }

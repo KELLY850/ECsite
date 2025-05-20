@@ -1,11 +1,11 @@
 package com.kadaisite.ECsite.User.Form;
 
+import com.kadaisite.ECsite.Admin.Validate.UpdatedGroup;
+import com.kadaisite.ECsite.User.Validate.AdminNewCreateGroup;
+import com.kadaisite.ECsite.User.Validate.CreateGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 
 
 /*
@@ -15,9 +15,9 @@ import org.hibernate.validator.constraints.Range;
 * */
 @Data
 public class LoginForm {
-    @NotBlank(message = "メールアドレスを入力してください")
-    @Email(message = "メールアドレスの形式が無効です。")
+    @NotBlank(message = "メールアドレスを入力してください",groups ={CreateGroup.class, UpdatedGroup.class,AdminNewCreateGroup.class})
+    @Email(message = "メールアドレスの形式が無効です。",groups ={CreateGroup.class,UpdatedGroup.class,AdminNewCreateGroup.class})
     private String email;
-    @NotBlank(message = "パスワードを入力してください。")
+    @NotBlank(message = "パスワードを入力してください。",groups ={CreateGroup.class,AdminNewCreateGroup.class})
     private String password;
 }

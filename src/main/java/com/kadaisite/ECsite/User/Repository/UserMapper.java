@@ -9,4 +9,5 @@ public interface UserMapper {
     User selectByUserEmail(String email);
 //    新規登録
     int insertUser(User user);
+
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kadaisite.ECsite.Admin.Repository.AdminUsersMapper">
+    <!-- メールでユーザ検索-->
+    <select id="getAllUsers" resultType="com.kadaisite.ECsite.User.Entity.User">
+        SELECT * FROM users WHERE delete_flg=0 ORDER BY id
+    </select>
+    <!--IDでユーザー検索-->
+    <select id="selectById" resultType="com.kadaisite.ECsite.User.Entity.User">
+        SELECT * FROM users WHERE id=#{id}
+    </select>
+
+    <update id="updateUser" parameterType="com.kadaisite.ECsite.User.Entity.User">
+        UPDATE users SET name=#{name},email=#{email},tel=#{tel},updated_at=CURRENT_TIMESTAMP WHERE id=#{id}
+    </update>
+</mapper>

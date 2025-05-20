@@ -14,4 +14,5 @@ public interface UserFormMapper {
     @Mapping(target = "deletedAt", ignore = true)
     @Mapping(target = "deleteFlg", ignore = true)
     User toEntity(NewAddForm newAddForm);
+    NewAddForm toForm(User user);
 }

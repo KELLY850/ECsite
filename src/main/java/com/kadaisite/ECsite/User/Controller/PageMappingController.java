@@ -4,8 +4,8 @@ import com.kadaisite.ECsite.User.Entity.User;
 import com.kadaisite.ECsite.User.Form.LoginForm;
 import com.kadaisite.ECsite.User.Form.NewAddForm;
 import com.kadaisite.ECsite.User.Service.UserService;
+import com.kadaisite.ECsite.User.Validate.CreateGroup;
 import com.kadaisite.ECsite.User.mapstruct.UserFormMapper;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +55,8 @@ public class PageMappingController {
         return "/users/newAdd/newEntry";
     }
     @PostMapping("/newEntry")
-    public String Entry(@ModelAttribute @Valid NewAddForm newAddForm,
+    public String Entry(@Validated(CreateGroup.class)
+                            @ModelAttribute NewAddForm newAddForm,
                         BindingResult result,
                         Model model,
                         RedirectAttributes redirectAttributes){
