@@ -20,6 +20,7 @@
       <label for="name" class="form-label">名前</label>
       <input type="text" class="form-control" id="name" placeholder="名前を入力してください" th:field="*{name}">
     </div>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></div>
     <div class="col-auto btn_log">
       <button type="submit" class="btn btn-primary">編集</button>
     </div>

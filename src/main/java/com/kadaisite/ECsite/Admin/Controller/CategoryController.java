@@ -1,5 +1,6 @@
 package com.kadaisite.ECsite.Admin.Controller;
 
+import com.kadaisite.ECsite.Admin.Common.CategoriesList;
 import com.kadaisite.ECsite.Admin.Entity.Categories;
 import com.kadaisite.ECsite.Admin.Form.CategoryForm;
 import com.kadaisite.ECsite.Admin.Service.CategoryService;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,13 +23,13 @@ import java.util.List;
 public class CategoryController {
     private final CategoryService categoryService;
     private final CategoryFormMapper categoryFormMapper;
+    private final CategoriesList categoriesList;
     //カテゴリー登録画面
     @GetMapping("/admin/config/createCategory")
     public String CreateCategory(Model model){
 //        登録されているカテゴリを取得。
-        List<Categories> categories = categoryService.CategoriesList();
+        List<Categories> categories =categoriesList.categoryList();
         if(categories == null){
-            categories=new ArrayList<>();
             model.addAttribute("error","カテゴリーの登録はまだありません");
         }
         model.addAttribute("categories",categories);
@@ -41,10 +41,9 @@ public class CategoryController {
                               BindingResult result,
                               Model model,
                               RedirectAttributes redirectAttributes){
-        List<Categories> categoryList=categoryService.CategoriesList();
+        List<Categories> categoryList=categoriesList.categoryList();
         if (result.hasErrors()){
             if(categoryList.isEmpty()){
-                categoryList=new ArrayList<>();
                 model.addAttribute("error", "カテゴリーの登録はまだありません");
             }
             model.addAttribute("categories",categoryList);
@@ -77,5 +76,30 @@ public class CategoryController {
         System.out.println("categoryForm:"+categoryForm);
         model.addAttribute("categoryForm",categoryForm);
         return "/admin/config/categoryEdit";
+    }
+//    カテゴリー編集・更新
+    @PostMapping("/admin/config/createCategory/edit/{id}")
+    public String categroyEditForm(@PathVariable("id") Long id,
+                                   @Validated @ModelAttribute CategoryForm categoryForm,
+                                   BindingResult result,
+                                   Model model
+                                   ){
+
+        if(result.hasErrors()){
+            return "/admin/config/categoryEdit";
+        }
+        try {
+            Categories categories = categoryFormMapper.toEntity(categoryForm);
+            categories.setId(id);
+            int newCate = categoryService.updateCategory(categories);
+            if(newCate != 1){
+                model.addAttribute("error","既に登録されている内容です");
+                return "/admin/config/categoryEdit";
+            }
+        }catch (RuntimeException e){
+            model.addAttribute("error" ,e.getMessage());
+            return "/admin/config/categoryEdit";
+        }
+        return "redirect:/admin/config/createCategory";
     }
 }

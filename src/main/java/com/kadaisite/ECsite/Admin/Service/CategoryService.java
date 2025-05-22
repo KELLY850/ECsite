@@ -1,5 +1,6 @@
 package com.kadaisite.ECsite.Admin.Service;
 
+import com.kadaisite.ECsite.Admin.Common.DiffParts;
 import com.kadaisite.ECsite.Admin.Entity.Categories;
 import com.kadaisite.ECsite.Admin.Repository.CategoriesMapper;
 import com.kadaisite.ECsite.Admin.Repository.ProductCategoryMapper;
@@ -36,6 +37,18 @@ public class CategoryService {
                 productCategoryMapper.insertCategoryProduct(productId,categoryId);
             }
         }
+    }
+//    商品の更新・修正機能
+    public int updateCategory(Categories categories){
+        Categories oldDB=categoriesMapper.selectById(categories.getId());
+        boolean diff=DiffParts.diff(oldDB,categories,(diffDB,newCategory)->{
+            diffDB.append("name",oldDB.getName(),newCategory.getName());
+        });
+        if(!diff){
+            return 0;
+        }
+        int result=categoriesMapper.updateCategory(categories);
+        return 1;
     }
 
 

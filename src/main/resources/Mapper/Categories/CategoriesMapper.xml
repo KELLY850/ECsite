@@ -7,10 +7,16 @@
     <insert id="insertCategories" parameterType="com.kadaisite.ECsite.Admin.Entity.Categories" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO categories (name,created_at) VALUES (#{name},CURRENT_TIMESTAMP)
     </insert>
+    <!-- カテゴリーを全て取得   -->
     <select id="getAllCategories" resultType="com.kadaisite.ECsite.Admin.Entity.Categories">
         SELECT * FROM categories WHERE delete_flg = 0 ORDER BY id
     </select>
+    <!-- 該当のカテゴリーデータを取得   -->
     <select id="selectById" resultType="com.kadaisite.ECsite.Admin.Entity.Categories">
         SELECT * FROM categories WHERE id = #{id}
     </select>
+    <!-- 該当のカテゴリーデータを更新   -->
+    <update id="updateCategory" parameterType="com.kadaisite.ECsite.Admin.Entity.Categories">
+        UPDATE categories SET name=#{name},updated_at=CURRENT_TIMESTAMP WHERE id =#{id}
+    </update>
 </mapper>
