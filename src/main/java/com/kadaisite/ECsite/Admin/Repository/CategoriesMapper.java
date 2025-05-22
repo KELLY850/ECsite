@@ -11,4 +11,6 @@ public interface CategoriesMapper {
     int insertCategories(Categories categories);
 //    全部のカテゴリーを取得
     List<Categories> getAllCategories();
+
+    Categories selectById(Long id);
 }

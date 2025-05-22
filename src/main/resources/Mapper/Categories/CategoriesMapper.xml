@@ -10,4 +10,7 @@
     <select id="getAllCategories" resultType="com.kadaisite.ECsite.Admin.Entity.Categories">
         SELECT * FROM categories WHERE delete_flg = 0 ORDER BY id
     </select>
+    <select id="selectById" resultType="com.kadaisite.ECsite.Admin.Entity.Categories">
+        SELECT * FROM categories WHERE id = #{id}
+    </select>
 </mapper>

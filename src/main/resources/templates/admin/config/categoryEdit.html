@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <div th:replace="~{admin/common/link ::link}"></div>
+  <title>カテゴリー編集画面</title>
+</head>
+<body>
+<div th:replace="~{admin/common/nav ::adminHeader}"></div>
+<!--カテゴリー編集画面本文-->
+<div class="container text-center contain">
+  <div class="main_text">
+    <p>カテゴリーの編集には、下記の必要項目を入力してください</p>
+  </div>
+  <form method="post" th:action="@{/admin/config/createCategory/edit/{id}(id=${categoryForm.id})}" th:object="${categoryForm}">
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}">
+    </div>
+    <input type="hidden" th:field="*{id}" />
+    <div class="row justify-content-center">
+      <label for="name" class="form-label">名前</label>
+      <input type="text" class="form-control" id="name" placeholder="名前を入力してください" th:field="*{name}">
+    </div>
+    <div class="col-auto btn_log">
+      <button type="submit" class="btn btn-primary">編集</button>
+    </div>
+  </form>
+</div>
+<!--script挿入-->
+<div th:replace="~{admin/common/script :: script}"></div>
+
+</body>
+</html>

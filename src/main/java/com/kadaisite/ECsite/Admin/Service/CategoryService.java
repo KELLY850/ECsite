@@ -14,15 +14,20 @@ public class CategoryService {
     private final CategoriesMapper categoriesMapper;
     private final ProductCategoryMapper productCategoryMapper;
 //    カテゴリ登録
-    public void save(Categories categories){
+    public int save(Categories categories){
         int category = categoriesMapper.insertCategories(categories);
-        if(category != 1){
-            throw new RuntimeException("登録に失敗しました");
+        if(category > 0){
+            return 1;
         }
+        return 0;
     }
 //カテゴリの一覧
     public List<Categories> CategoriesList(){
         return categoriesMapper.getAllCategories();
+    }
+//    カテゴリID取得
+    public Categories categoryId(Long id){
+        return categoriesMapper.selectById(id);
     }
 //    商品にカテゴリを紐付け。
     public void saveProductCategory(List<Long>categoryIds,Long productId){
@@ -32,5 +37,6 @@ public class CategoryService {
             }
         }
     }
+
 
 }

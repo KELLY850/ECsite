@@ -12,6 +12,7 @@
     <div class="main_text">
         <p>カテゴリーの登録には必要項目を入力してください</p>
     </div>
+    <div class="main_text alert alert-warning" th:if="${success}" th:text="${success}"></div>
     <form method="post" th:action="@{/admin/config/createCategory}" th:object="${categoryForm}">
         <div th:if="${error}" class="alert alert-danger" th:text="${error}">
         </div>
@@ -25,17 +26,17 @@
         </div>
     </form>
 </div>
-<div th:unless="${categories.size() > 0}">
+<div th:unless="${categories != null and !#lists.isEmpty(categories)}">
     <p style="text-align: center;">カテゴリーが登録されていません。</p>
 </div>
-<div class="container text-center" th:if="${categories.size() > 0}">
+<div class="container text-center" th:if="${categories != null and !#lists.isEmpty(categories)}">
     <table class="table table-striped table-secondary">
         <thead>
         <tr>
             <th scope="col">ID</th>
             <th scope="col">カテゴリ名</th>
             <th scope="col">登録日</th>
-            <!--                <th scope="col">詳細</th>-->
+            <th scope="col">編集</th>
         </tr>
         </thead>
         <tbody>
@@ -44,7 +45,7 @@
             <td th:text="${category.name}"></td>
             <!--  ここで登録日を希望の表示方々に変換          -->
             <td th:text="${#temporals.format(category.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
-            <!--                <td ><a th:href="@{'/users/userDetail/'+${test.id}}">詳細</a></td>-->
+            <td ><a th:href="@{'/admin/config/createCategory/edit/'+${category.id}}">編集</a></td>
         </tr>
         </tbody>
     </table>

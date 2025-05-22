@@ -8,6 +8,7 @@ import lombok.Data;
 * */
 @Data
 public class CategoryForm {
+    private Long id;
     @NotBlank(message = "空白が入っていたり、未入力となっています")
     private String name;
 }
