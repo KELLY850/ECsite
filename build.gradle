@@ -47,6 +47,8 @@ dependencies {
 //	mplementation 'org.mybatis:mybatis:3.5.15'
 //	implementation 'org.postgresql:postgresql:42.7.1' // PostgreSQLドライバ
 //	mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.4.1'
+//	DiffBuilderを下記で設定。
+	implementation 'org.apache.commons:commons-lang3:3.17.0'
 }
 
 tasks.named('test') {
