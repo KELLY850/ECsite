@@ -98,7 +98,7 @@ public class AdminUserController {
                 redirectAttributes.addFlashAttribute("message","変更を更新しました");
             }else {
                 model.addAttribute("roles",admin_users.getRole());
-                model.addAttribute("error","更新に失敗しました");
+                model.addAttribute("error","変更はありませんでした");
                 return "admin/AdminUser/adminUserEdit";
             }
         } catch (RuntimeException e) {

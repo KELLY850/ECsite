@@ -1,6 +1,6 @@
 package com.kadaisite.ECsite.Admin.Service;
 
-import com.kadaisite.ECsite.Admin.Common.DiffComport;
+import com.kadaisite.ECsite.Admin.Common.DiffParts;
 import com.kadaisite.ECsite.Admin.Entity.Admin_users;
 import com.kadaisite.ECsite.Admin.Repository.AdminMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,7 @@ public class AdminUserService {
     public int updateAdmin(Admin_users admin_users){
 //        ここで元々のデータを取得。
         Admin_users adminDB =adminMapper.selectbyId(admin_users.getId());
-//        DiffComport.DiffDB diff =new DiffComport.DiffDB(adminDB,admin_users);
-        boolean diff =DiffComport.diff(adminDB,
+        boolean diff = DiffParts.diff(adminDB,
                 admin_users,
                 (diffDB, adminNewUser) ->
                 {

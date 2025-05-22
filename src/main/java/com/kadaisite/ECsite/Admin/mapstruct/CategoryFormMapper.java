@@ -17,5 +17,6 @@ public interface CategoryFormMapper {
     @Mapping(target = "deletedAt", ignore = true)
     @Mapping(target = "deleteFlg", ignore = true)
     Categories toEntity(CategoryForm categoryForm);
+    CategoryForm toForm(Categories categories);
 }
 

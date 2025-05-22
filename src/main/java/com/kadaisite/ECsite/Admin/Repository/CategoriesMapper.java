@@ -9,6 +9,10 @@ import java.util.List;
 public interface CategoriesMapper {
     //新規カテゴリー登録の数確認（1件ずつ）
     int insertCategories(Categories categories);
-//    全部のカテゴリーを取得
+    //    全部のカテゴリーを取得
     List<Categories> getAllCategories();
+    //カテゴリーをIDで取得
+    Categories selectById(Long id);
+    //    カテゴリーの更新
+    int updateCategory(Categories categories);
 }
