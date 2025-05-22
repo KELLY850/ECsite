@@ -1,5 +1,6 @@
 package com.kadaisite.ECsite.Admin.Service;
 
+import com.kadaisite.ECsite.Admin.Common.DiffParts;
 import com.kadaisite.ECsite.Admin.Entity.Admin_users;
 import com.kadaisite.ECsite.Admin.Form.NewUserForm;
 import com.kadaisite.ECsite.Admin.Repository.AdminMapper;
@@ -43,25 +44,38 @@ public class ECsiteUserService {
 
 //    ユーザー情報の更新
     public int updatedUser(User user){
-        boolean result=false;
+//        boolean result=false;
         User oldUser =adminUsersMapper.selectById(user.getId());
+        boolean diff = DiffParts.diff(oldUser,user,(diffDB, newUser) ->{
+                    diffDB.append("name",oldUser.getName(),newUser.getName());
+                    diffDB.append("email",oldUser.getEmail(),newUser.getEmail());
+                    diffDB.append("tel",oldUser.getTel(),newUser.getTel());
+                });
+        if(!diff){
+            return 0;
+        }
+        int result =adminUsersMapper.updateUser(user);
+        return 1;
+
+
+
 //        入力値が以前と違ったらtrueを返す。
-        if(!oldUser.getName().equals(user.getName())){
-            oldUser.setName(user.getName());
-            result= true;
-        }
-        if (!oldUser.getEmail().equals(user.getEmail())){
-            oldUser.setEmail(user.getEmail());
-            result=true;
-        }
-        if (!oldUser.getTel().equals(user.getTel())){
-            oldUser.setTel(user.getTel());
-            result=true;
-        }
-        if(result){
-           return adminUsersMapper.updateUser(oldUser);
-        }
-        return 0;
+//        if(!oldUser.getName().equals(user.getName())){
+//            oldUser.setName(user.getName());
+//            result= true;
+//        }
+//        if (!oldUser.getEmail().equals(user.getEmail())){
+//            oldUser.setEmail(user.getEmail());
+//            result=true;
+//        }
+//        if (!oldUser.getTel().equals(user.getTel())){
+//            oldUser.setTel(user.getTel());
+//            result=true;
+//        }
+//        if(result){
+//           return adminUsersMapper.updateUser(oldUser);
+//        }
+//        return 0;
 
     }
 

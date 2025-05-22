@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.function.BiConsumer;
 
 
-public class DiffComport {
+public class DiffParts {
 
     public static <T> boolean diff(T oldDB, T newForm, BiConsumer<DiffDB,T>comparer){
     DiffDB diffDB =  new DiffDB(oldDB, newForm);
