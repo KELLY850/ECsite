@@ -15,5 +15,12 @@
     <insert id="insertUser" parameterType="com.kadaisite.ECsite.Admin.Entity.Admin_users" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO admin_users (name,email,password,created_at) VALUES (#{name},#{email},#{password},CURRENT_TIMESTAMP)
     </insert>
+    <!--    IDで管理者検索-->
+    <select id="selectbyId" resultType="com.kadaisite.ECsite.Admin.Entity.Admin_users">
+        SELECT * FROM admin_users WHERE id =#{id}
+    </select>
+    <update id="updateAdminUser" parameterType="com.kadaisite.ECsite.Admin.Entity.Admin_users">
+        UPDATE Admin_users SET name=#{name},email=#{email},role=#{role},updated_at=CURRENT_TIMESTAMP WHERE id=#{id}
+    </update>
 </mapper>
 
