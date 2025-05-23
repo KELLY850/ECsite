@@ -24,6 +24,7 @@ public class CategoryController {
     private final CategoryService categoryService;
     private final CategoryFormMapper categoryFormMapper;
     private final CategoriesList categoriesList;
+
     //カテゴリー登録画面
     @GetMapping("/admin/config/createCategory")
     public String CreateCategory(Model model){
@@ -36,16 +37,17 @@ public class CategoryController {
         model.addAttribute("categoryForm", new CategoryForm());
         return "/admin/config/category";
     }
+//    カテゴリ登録
     @PostMapping("/admin/config/createCategory")
     public String CategoryAdd(@Validated @ModelAttribute CategoryForm categoryForm,
                               BindingResult result,
                               Model model,
                               RedirectAttributes redirectAttributes){
         List<Categories> categoryList=categoriesList.categoryList();
+        if(categoryList.isEmpty()){
+            model.addAttribute("error", "カテゴリーの登録はまだありません");
+        }
         if (result.hasErrors()){
-            if(categoryList.isEmpty()){
-                model.addAttribute("error", "カテゴリーの登録はまだありません");
-            }
             model.addAttribute("categories",categoryList);
             return "/admin/config/category";
         }
@@ -77,6 +79,7 @@ public class CategoryController {
         model.addAttribute("categoryForm",categoryForm);
         return "/admin/config/categoryEdit";
     }
+
 //    カテゴリー編集・更新
     @PostMapping("/admin/config/createCategory/edit/{id}")
     public String categroyEditForm(@PathVariable("id") Long id,

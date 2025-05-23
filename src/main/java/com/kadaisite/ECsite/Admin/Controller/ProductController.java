@@ -86,4 +86,11 @@ public class ProductController {
         model.addAttribute("products",products);
         return "/admin/product/product";
     }
+  /*
+  *商品詳細画面
+  *
+  */
+
+    @GetMapping("/admin/product/detail/{id}")
+    public String
 }

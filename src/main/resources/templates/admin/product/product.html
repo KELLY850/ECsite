@@ -24,7 +24,7 @@
           <th scope="col">金額</th>
           <th scope="col">在庫</th>
           <th scope="col">登録日</th>
-          <!--                <th scope="col">詳細</th>-->
+          <th scope="col">詳細</th>
         </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
           <td th:text="${product.price}"></td>
           <td th:text="${product.stock}"></td>
           <td th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
-<!--          <td ><a th:href="@{'/users/userDetail/'+${test.id}}">詳細</a></td>-->
+          <td ><a th:href="@{'/admin/product/detail/'+${product.id}}">詳細</a></td>
         </tr>
         </tbody>
       </table>
